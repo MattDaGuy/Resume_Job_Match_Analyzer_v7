@@ -3,7 +3,9 @@ export default async function handler(req, res) {
   try {
     const { resume, jobDescription } = req.body;
 
-    const prompt = `Compare the following resume to the job description below. Return a JSON object with:
+ const prompt = `
+You are a hiring analyst. Compare the following resume to the job description and return ONLY valid JSON in this exact format:
+
 {
   "fitPercentage": number (0–100),
   "qualifications": string[],
@@ -15,7 +17,8 @@ Resume:
 ${resume}
 
 Job Description:
-${jobDescription}`;
+${jobDescription}
+`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
