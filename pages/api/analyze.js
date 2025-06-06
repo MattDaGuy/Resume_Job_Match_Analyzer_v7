@@ -39,12 +39,11 @@ ${jobDescription}
     const output = result.choices?.[0]?.message?.content || '';
 
     try {
-      const parsed = JSON.parse(output);
-      return res.status(200).json(parsed);
-    } catch (err) {
-      return res.status(500).json({ error: 'OpenAI response was not valid JSON', raw: output });
-    }
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
+  const parsed = JSON.parse(output);
+  return res.status(200).json(parsed);
+} catch (err) {
+  console.error("Raw GPT output:", output); // TEMP LOG
+  return res.status(500).json({ error: 'OpenAI response was not valid JSON', raw: output });
 }
+
+ 
