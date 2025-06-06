@@ -36,6 +36,7 @@ ${jobDescription}
     });
 
     const result = await response.json();
+console.log('Raw OpenAI response:', result); // TEMP LOG
     const output = result.choices?.[0]?.message?.content || '';
 
     try {
